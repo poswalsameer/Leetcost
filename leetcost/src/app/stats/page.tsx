@@ -13,6 +13,16 @@ const profileData = {
     hard: { solved: 41, total: 766, color: "rose" }
   }
 };
+function formatTime(minutes: number) {
+  const timeUnits = {
+    decades: Math.floor(minutes / (60 * 24 * 365 * 10)),
+    years: Math.floor((minutes % (60 * 24 * 365 * 10)) / (60 * 24 * 365)),
+    months: Math.floor((minutes % (60 * 24 * 365)) / (60 * 24 * 30)),
+    days: Math.floor((minutes % (60 * 24 * 30)) / (60 * 24)),
+    hours: Math.floor((minutes % (60 * 24)) / 60),
+  };
+  return Object.entries(timeUnits).map(([unit, value]) => `${value || 0} ${unit}`).join(', ');
+}
 
 function ProblemCard({ 
   difficulty, 
@@ -89,7 +99,7 @@ function App() {
               <div className="flex items-center gap-2">
                 <ClockAlert className="text-orange-400" size={20} />
                 <span className="text-lg sm:text-2xl text-purple-100">
-                  Time wasted: <span className="text-orange-400 font-bold">{totalTime} minutes</span>
+                  Time wasted: <span className="text-orange-400 font-bold">{formatTime(totalTime)}</span>
                 </span>
               </div>
             </div>
