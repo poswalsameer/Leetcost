@@ -13,6 +13,14 @@ const profileData = {
     hard: { solved: 41, total: 766, color: "rose" }
   }
 };
+function formatTime(minutes: number) {
+  const timeUnits = {
+    totalDays: Math.floor(minutes / (60 * 24)),
+    totalHours: Math.floor(minutes / 60),
+    totalMinutes: minutes,
+  };
+  return `${timeUnits.totalDays} days / ${timeUnits.totalHours} hours / ${timeUnits.totalMinutes} minutes`;
+}
 
 function ProblemCard({ 
   difficulty, 
@@ -89,7 +97,7 @@ function App() {
               <div className="flex items-center gap-2">
                 <ClockAlert className="text-orange-400" size={20} />
                 <span className="text-lg sm:text-2xl text-purple-100">
-                  Time wasted: <span className="text-orange-400 font-bold">{totalTime} minutes</span>
+                  Time wasted: <span className="text-orange-400 font-bold">{formatTime(totalTime)}</span>
                 </span>
               </div>
             </div>
