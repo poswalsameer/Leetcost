@@ -15,13 +15,11 @@ const profileData = {
 };
 function formatTime(minutes: number) {
   const timeUnits = {
-    decades: Math.floor(minutes / (60 * 24 * 365 * 10)),
-    years: Math.floor((minutes % (60 * 24 * 365 * 10)) / (60 * 24 * 365)),
-    months: Math.floor((minutes % (60 * 24 * 365)) / (60 * 24 * 30)),
-    days: Math.floor((minutes % (60 * 24 * 30)) / (60 * 24)),
-    hours: Math.floor((minutes % (60 * 24)) / 60),
+    totalDays: Math.floor(minutes / (60 * 24)),
+    totalHours: Math.floor(minutes / 60),
+    totalMinutes: minutes,
   };
-  return Object.entries(timeUnits).map(([unit, value]) => `${value || 0} ${unit}`).join(', ');
+  return `${timeUnits.totalDays} days / ${timeUnits.totalHours} hours / ${timeUnits.totalMinutes} minutes`;
 }
 
 function ProblemCard({ 
